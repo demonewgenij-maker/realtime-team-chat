@@ -1,5 +1,7 @@
 # Realtime Team Chat
 
+[![CI](https://github.com/demonewgenij-maker/realtime-team-chat/actions/workflows/ci.yml/badge.svg)](https://github.com/demonewgenij-maker/realtime-team-chat/actions/workflows/ci.yml)
+
 A compact, production-minded realtime team chat (a mini Slack/Telegram) built
 from scratch as a reference implementation. FastAPI serves both a JSON REST API
 and a WebSocket hub; a dependency-light SQLite layer (stdlib `sqlite3`) stores
