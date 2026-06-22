@@ -43,8 +43,9 @@ pushes a JSON event to every WebSocket subscribed to that channel.
 |---|---|
 | Env-only config (`os.getenv`) | No secrets in code; `SECRET_KEY` defaults to a loud placeholder; tests override via env. |
 | Parameterized SQL everywhere | No string formatting in queries -> injection-safe by construction. |
-| WS auth via `?token=<JWT>` | Browsers can't set headers on `WebSocket`; token in query is verified before `accept()`. |
+| WS auth via `?token=<JWT>` | Browsers can't set headers on `WebSocket`, so the token rides in the query and is verified *before* `accept()`. Trade-off: a query token can surface in proxy/access logs — mitigated by a short token TTL; passing it via `Sec-WebSocket-Protocol` is the hardening step (roadmap). |
 | `pbkdf2_hmac` for passwords | Salted + slow hashing from the stdlib, no native build dependency. |
+| Channels public within the deployment | Any authenticated user may read and subscribe to any channel. Per-channel membership/ACL is intentionally **out of scope** for this reference implementation (see roadmap) — it's a known limitation, not an oversight. |
 | Singleton hub on `app.state` | One in-process `ConnectionManager`; async `broadcast` awaited from async routes. |
 | PWA offline shell | Service worker caches static assets, never API/WS traffic. |
 | Pure pytest incl. WebSocket tests | `TestClient.websocket_connect` proves realtime delivery without external infra. |
@@ -80,10 +81,12 @@ users (e.g. `alice`, `bob`) in two browser tabs to watch realtime delivery.
 
 Out of scope for this reference implementation, but natural next steps:
 
+- Per-channel membership & access control (ACL)
 - Bot API (programmatic message senders)
 - Web-push notifications
 - Invite-based registration / org membership
 - File uploads and attachments
+- Horizontal scaling of the WS hub via Redis pub/sub
 
 ## Notes
 
