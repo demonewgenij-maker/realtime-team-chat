@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Realtime Team Chat</title>
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <meta name="theme-color" content="#1f2933" />
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <!-- Auth screen -->
+  <section id="auth-screen" class="screen">
+    <div class="card">
+      <h1>Team Chat</h1>
+      <input id="auth-username" placeholder="username" autocomplete="username"
+             autocapitalize="none" autocorrect="off" />
+      <input id="auth-password" type="password" placeholder="password"
+             autocomplete="current-password" />
+      <div class="row">
+        <button id="btn-login">Log in</button>
+        <button id="btn-register" class="secondary">Register</button>
+      </div>
+      <p id="auth-error" class="error" hidden></p>
+    </div>
+  </section>
+
+  <!-- Chat screen -->
+  <section id="chat-screen" class="screen" hidden>
+    <aside id="sidebar">
+      <header>
+        <span id="who"></span>
+        <button id="btn-logout" class="link">logout</button>
+      </header>
+      <h2>Channels</h2>
+      <ul id="channel-list"></ul>
+      <form id="new-channel-form">
+        <input id="new-channel-name" placeholder="new channel" maxlength="60" />
+        <button type="submit">+</button>
+      </form>
+    </aside>
+    <main>
+      <header id="channel-header"></header>
+      <ul id="messages"></ul>
+      <form id="message-form">
+        <input id="message-input" placeholder="Type a message…" maxlength="4000"
+               autocomplete="off" />
+        <button type="submit">Send</button>
+      </form>
+    </main>
+  </section>
+
+  <script src="/app.js"></script>
+</body>
+</html>

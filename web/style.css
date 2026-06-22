@@ -1,0 +1,89 @@
+:root {
+  --bg: #1f2933;
+  --panel: #2b3a47;
+  --accent: #3da9fc;
+  --text: #e8eef2;
+  --muted: #9aa7b0;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  height: 100vh;
+}
+.screen { height: 100vh; }
+
+/* Auth */
+#auth-screen { display: flex; align-items: center; justify-content: center; }
+.card {
+  background: var(--panel);
+  padding: 2rem;
+  border-radius: 12px;
+  width: min(360px, 90vw);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.card h1 { margin: 0 0 0.5rem; text-align: center; }
+input {
+  padding: 0.6rem 0.8rem;
+  border: 1px solid #3d4f5c;
+  border-radius: 8px;
+  background: #1b252d;
+  color: var(--text);
+  font-size: 1rem;
+}
+button {
+  padding: 0.6rem 0.9rem;
+  border: none;
+  border-radius: 8px;
+  background: var(--accent);
+  color: #06121f;
+  font-weight: 600;
+  cursor: pointer;
+}
+button.secondary { background: #4a5b68; color: var(--text); }
+button.link { background: none; color: var(--muted); padding: 0; font-weight: 400; }
+.row { display: flex; gap: 0.5rem; }
+.row button { flex: 1; }
+.error { color: #ff6b6b; margin: 0; font-size: 0.9rem; }
+
+/* Chat layout */
+#chat-screen { display: grid; grid-template-columns: 240px 1fr; }
+#sidebar {
+  background: var(--panel);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  overflow-y: auto;
+}
+#sidebar header { display: flex; justify-content: space-between; align-items: center; }
+#sidebar h2 { font-size: 0.8rem; text-transform: uppercase; color: var(--muted); margin: 0.5rem 0 0; }
+#channel-list { list-style: none; margin: 0; padding: 0; flex: 1; }
+.channel { padding: 0.4rem 0.5rem; border-radius: 6px; cursor: pointer; }
+.channel:hover { background: #34485699; }
+.channel.active { background: var(--accent); color: #06121f; }
+#new-channel-form { display: flex; gap: 0.3rem; }
+#new-channel-form input { flex: 1; }
+#new-channel-form button { width: 40px; }
+
+main { display: flex; flex-direction: column; height: 100vh; }
+#channel-header {
+  padding: 1rem;
+  border-bottom: 1px solid #3d4f5c;
+  font-weight: 700;
+}
+#messages { list-style: none; margin: 0; padding: 1rem; flex: 1; overflow-y: auto; }
+.message { padding: 0.3rem 0; display: flex; gap: 0.6rem; }
+.message .author { color: var(--accent); font-weight: 600; }
+.message .content { white-space: pre-wrap; word-break: break-word; }
+#message-form { display: flex; gap: 0.5rem; padding: 1rem; border-top: 1px solid #3d4f5c; }
+#message-form input { flex: 1; }
+
+@media (max-width: 640px) {
+  #chat-screen { grid-template-columns: 1fr; }
+  #sidebar { max-height: 35vh; }
+}
